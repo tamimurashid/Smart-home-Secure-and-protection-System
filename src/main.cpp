@@ -27,8 +27,7 @@ DHT dht(DHTPIN, DHTTYPE);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 // ==== Telegram Bot ====
-// #define BOT_TOKEN "7982663980:AAFhpE02DBjD70e0FCjNQ2gAoc2otYXTDkE"
-// #define CHAT_ID   "7982663980"
+
 
 #define BOT_TOKEN TOKENS
 #define CHAT_ID   ID
