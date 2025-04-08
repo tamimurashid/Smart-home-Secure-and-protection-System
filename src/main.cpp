@@ -40,6 +40,7 @@ bool sentAlert = false;
 unsigned long lastCheck = 0;
 const unsigned long checkInterval = 5000;
 
+// this methods helps to synchronize time so that the device can connect with telegram  
 void syncTime() {
   configTime(0, 0, "pool.ntp.org", "time.nist.gov");
   Serial.print("⏳ Syncing time...");
