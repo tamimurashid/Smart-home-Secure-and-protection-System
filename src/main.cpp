@@ -43,6 +43,7 @@ void sendToBlynk() {
   Blynk.virtualWrite(V2, flame);
   Blynk.virtualWrite(V3, smoke);
   Blynk.virtualWrite(V4, rain);
+  Blynk.virtualWrite(V5, BUZZER);
 }
 
 void setup() {
@@ -50,7 +51,7 @@ void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0, 0); lcd.print("--AMORE-SYSTEM---------");
+  lcd.setCursor(0, 0); lcd.print("---AMORE-SYSTEM-----");
 
   dht.begin();
   pinMode(BUZZER, OUTPUT);
@@ -85,6 +86,12 @@ void setup() {
   timer.setInterval(5000L, sendToBlynk);
 }
 
+void alert(int Delay, int Delay2){
+  digitalWrite(BUZZER, HIGH);
+  delay(Delay);
+  digitalWrite(BUZZER, LOW);
+  delay(Delay2);
+}
 void loop() {
   Blynk.run();
   timer.run();
@@ -95,13 +102,17 @@ void loop() {
   int smoke = analogRead(SMOKE_PIN);
   int rain = analogRead(RAIN_PIN);
 
-  bool flameDetected = flame < 500;
-  bool rainDetected = rain < 2000;
+  bool flameDetected = flame > 1500;
+  bool rainDetected = rain > 4100;
 
-  digitalWrite(BUZZER, flameDetected ? HIGH : LOW);
+  if (flameDetected) {
+  alert(100, 100);  // Activate buzzer pattern
+  } else {
+    digitalWrite(BUZZER, LOW);  // Ensure buzzer stays off
+  }
 
   lcd.setCursor(0, 0); lcd.print("T:"); lcd.print(temp); lcd.print("C H:"); lcd.print(hum); lcd.print("%  ");
-  lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flameDetected ? "YES" : "NO "); lcd.print("    ");
+  lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flame);lcd.print("     ");
   lcd.setCursor(0, 2); lcd.print("Smoke: "); lcd.print(smoke); lcd.print("     ");
   lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print(rain); lcd.print("     ");
 
