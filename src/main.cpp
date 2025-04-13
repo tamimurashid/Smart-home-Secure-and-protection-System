@@ -104,6 +104,8 @@ void loop() {
 
   bool flameDetected = flame < 500;
   bool rainDetected = rain < 1500;
+  bool high_temp = temp > 40;
+  
 
   if (flameDetected) {
   alert(1000, 1000);  // Activate buzzer pattern
