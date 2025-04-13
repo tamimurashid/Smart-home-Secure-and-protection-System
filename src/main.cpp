@@ -111,12 +111,16 @@ void loop() {
   if(flame <  500){
     alert(1000, 1000);
     lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Fire detected");
+
   }else if(flame > 500){
-    lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Safe ");
-  }else if(rain  < 1500){
+    lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Safe         ");
+
+  }if(rain  < 2000){
     lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("Rain detected"); 
-  }else if(rain > 1500){
-    lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("No Rain"); 
+
+  }else if(rain > 2000){
+    lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("No Rain      "); 
+
   }else {
     digitalWrite(BUZZER, LOW);
   }
@@ -124,19 +128,19 @@ void loop() {
 
  
 
-  lcd.setCursor(0, 0); lcd.print("T:"); lcd.print(temp); lcd.print("C H:"); lcd.print(hum); lcd.print("%  ");
-  // lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flame);lcd.print("     ");
-  lcd.setCursor(0, 2); lcd.print("Smoke: "); lcd.print(smoke); lcd.print("     ");
-  // lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print(rain); lcd.print("     ");
+  lcd.setCursor(0, 0); lcd.print("T:"); lcd.print(temp); lcd.print("C   H:"); lcd.print(hum); lcd.print("%  ");
+  
+  lcd.setCursor(0, 2); lcd.print("Smoke: "); lcd.print(smoke); lcd.print(" ppm    ");
+  
 
   // Optional alert logic (can be expanded to Blynk alerts or notification widget)
-  if (flameDetected && !sentAlert) {
-    Blynk.logEvent("flame_detected", "🔥 Fire detected in the area!");
-    sentAlert = true;
-  }
-    if (rainDetected) {
-    Blynk.logEvent("rain_detected", "☔ Rain detected outside");
-  }
+  // if (flameDetected && !sentAlert) {
+  //   Blynk.logEvent("flame_detected", "🔥 Fire detected in the area!");
+  //   sentAlert = true;
+  // }
+  //   if (rainDetected) {
+  //   Blynk.logEvent("rain_detected", "☔ Rain detected outside");
+  // }
 
   delay(2000);
 }
