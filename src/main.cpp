@@ -115,19 +115,19 @@ void loop() {
     lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Safe ");
   }else if(rain  < 1500){
     lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("Rain detected"); 
+  }else if(rain > 1500){
+    lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("No Rain"); 
+  }else {
+    digitalWrite(BUZZER, LOW);
   }
 
 
-  if (flameDetected) {
-  alert(1000, 1000);  // Activate buzzer pattern
-  } else {
-    digitalWrite(BUZZER, LOW);  // Ensure buzzer stays off
-  }
+ 
 
   lcd.setCursor(0, 0); lcd.print("T:"); lcd.print(temp); lcd.print("C H:"); lcd.print(hum); lcd.print("%  ");
   // lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flame);lcd.print("     ");
   lcd.setCursor(0, 2); lcd.print("Smoke: "); lcd.print(smoke); lcd.print("     ");
-  lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print(rain); lcd.print("     ");
+  // lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print(rain); lcd.print("     ");
 
   // Optional alert logic (can be expanded to Blynk alerts or notification widget)
   if (flameDetected && !sentAlert) {
