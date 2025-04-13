@@ -103,10 +103,10 @@ void loop() {
   int rain = analogRead(RAIN_PIN);
 
   bool flameDetected = flame < 500;
-  bool rainDetected = rain < 1500;
+  bool rainDetected = rain > 4100;
 
   if (flameDetected) {
-  alert(1000, 1000);  // Activate buzzer pattern
+  alert(100, 100);  // Activate buzzer pattern
   } else {
     digitalWrite(BUZZER, LOW);  // Ensure buzzer stays off
   }
