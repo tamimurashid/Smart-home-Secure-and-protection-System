@@ -92,6 +92,8 @@ void alert(int Delay, int Delay2){
   digitalWrite(BUZZER, LOW);
   delay(Delay2);
 }
+
+
 void loop() {
   Blynk.run();
   timer.run();
@@ -105,7 +107,16 @@ void loop() {
   bool flameDetected = flame < 500;
   bool rainDetected = rain < 1500;
   bool high_temp = temp > 40;
-  
+
+  if(flame <  500){
+    alert(1000, 1000);
+    lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Fire detected");
+  }else if(flame > 500){
+    lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Safe ");
+  }else if(rain  < 1500){
+    lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print("Rain detected"); 
+  }
+
 
   if (flameDetected) {
   alert(1000, 1000);  // Activate buzzer pattern
@@ -114,7 +125,7 @@ void loop() {
   }
 
   lcd.setCursor(0, 0); lcd.print("T:"); lcd.print(temp); lcd.print("C H:"); lcd.print(hum); lcd.print("%  ");
-  lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flame);lcd.print("     ");
+  // lcd.setCursor(0, 1); lcd.print("Flame: "); lcd.print(flame);lcd.print("     ");
   lcd.setCursor(0, 2); lcd.print("Smoke: "); lcd.print(smoke); lcd.print("     ");
   lcd.setCursor(0, 3); lcd.print("Rain: "); lcd.print(rain); lcd.print("     ");
 
