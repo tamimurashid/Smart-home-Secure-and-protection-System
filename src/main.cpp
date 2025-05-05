@@ -51,7 +51,7 @@ void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0, 0); lcd.print("---AMORE-SYSTEM-----");
+  lcd.setCursor(0, 0); lcd.print("---BLUE-LAND-TECH---");
 
   dht.begin();
   pinMode(BUZZER, OUTPUT);
@@ -109,7 +109,7 @@ void loop() {
   bool high_temp = temp > 40;
 
   if(flame <  500){
-    alert(1000, 1000);
+    alert(500, 500);
     lcd.setCursor(0, 1); lcd.print("Flame: ");lcd.print("Fire detected");
 
   }else if(flame > 500){
@@ -142,5 +142,5 @@ void loop() {
   //   Blynk.logEvent("rain_detected", "☔ Rain detected outside");
   // }
 
-  delay(2000);
+  delay(1000);
 }
